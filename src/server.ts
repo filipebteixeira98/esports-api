@@ -7,5 +7,5 @@ app.get('/', (request, response) => {
 });
 
 app.listen(3333, () => {
-  console.log('Server is running at http://127.0.0.1/3333');
+  console.log('🚀 Server is running at http://127.0.0.1/3333');
 });
