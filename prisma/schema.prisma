@@ -15,3 +15,15 @@ model Game {
   title     String
   bannerUrl String
 }
+
+model Ad {
+  id              String   @id
+  name            String
+  yearsPlaying    Int
+  discord         String
+  weekDays        String
+  hourStart       Int
+  hourEnd         Int
+  useVoiceChannel Boolean
+  createdAt       DateTime @default(now())
+}
