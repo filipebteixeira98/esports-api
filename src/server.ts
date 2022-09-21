@@ -29,12 +29,35 @@ app.post('/ads', (request, response) => {
   return response.status(201).json([]);
 });
 
-app.get('/games/:id/ads', (request, response) => {
+app.get('/games/:id/ads', async (request, response) => {
   const gameId = request.params.id;
 
-  console.log(gameId);
+  const ads = await prisma.ad.findMany({
+    select: {
+      id: true,
+      name: true,
+      weekDays: true,
+      useVoiceChannel: true,
+      yearsPlaying: true,
+      hourStart: true,
+      hourEnd: true,
+    },
+    where: {
+      gameId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
 
-  return response.json([]);
+  return response.json(
+    ads.map((ad) => {
+      return {
+        ...ad,
+        weekDays: ad.weekDays.split(','),
+      };
+    })
+  );
 });
 
 app.get('/ads/:id/discord', (request, response) => {
